@@ -1,0 +1,40 @@
+OBJ=fcab.o event.o menu.o view.o draw.o scrlbar.o doc.o file.o
+
+all : fcab databox fsn
+
+fcab : $(OBJ)
+	mlink -Ze:\1bprog\bin\lib.lst -F8192 -Ml -l40000 -pfcab.map -ofcab. $(OBJ)
+
+fcab.c : fcab.k view.h doc.h
+	mkp -s fcab.k fcab.c
+
+fcab.o : fcab.c
+	mcc -Alfu -O fcab.c
+
+event.o : event.c view.h databox.h doc.h
+	mcc -Alfu -O event.c
+
+menu.o : menu.c view.h databox.h doc.h
+	mcc -Alfu -O menu.c
+
+view.o : view.c view.h databox.h doc.h
+	mcc -Alfu -O view.c
+
+draw.o : draw.c view.h doc.h
+	mcc -Alfu -O draw.c
+
+scrlbar.o : scrlbar.c view.h doc.h
+	mcc -Alfu -O scrlbar.c
+
+doc.o : doc.c file.h doc.h
+	mcc -Alfu -O doc.c
+
+file.o : file.c file.h
+	mcc -Alfu -O file.c
+
+databox : databox.src
+	databox -l databox.src databox
+
+fsn : fsn.src
+	databox -n fsn.src fsn
+

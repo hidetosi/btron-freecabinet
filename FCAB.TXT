@@ -1,6 +1,3 @@
-# btron-freecabinet
-Opensource implementation of BTRON(1B/V) Cabinet
-
 =====================================================================
                  フリーキャビネット      Ver. 1.10
                          取扱説明書
